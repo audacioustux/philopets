@@ -5,6 +5,7 @@ defmodule Philopets.Files.ImagesTest do
 
   describe "images" do
     alias Philopets.Files.Images.Image
+    alias Philopets.Accounts.ProfilesFixtures
 
     import Philopets.Files.ImagesFixtures
 
@@ -21,7 +22,8 @@ defmodule Philopets.Files.ImagesTest do
     end
 
     test "create_image/1 with valid data creates a image" do
-      valid_attrs = %{name: "some name", size: 42}
+      profile = ProfilesFixtures.profile_fixture()
+      valid_attrs = %{name: "some name", size: 42, profile_id: profile.id}
 
       assert {:ok, %Image{} = image} = Images.create_image(valid_attrs)
       assert image.name == "some name"

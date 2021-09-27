@@ -4,6 +4,8 @@ defmodule Philopets.Accounts.ProfilesFixtures do
   entities via the `Philopets.Accounts.Profiles` context.
   """
 
+  alias Philopets.AccountsFixtures
+
   @doc """
   Generate a profile.
   """
@@ -11,7 +13,8 @@ defmodule Philopets.Accounts.ProfilesFixtures do
     {:ok, profile} =
       attrs
       |> Enum.into(%{
-        display_name: "some display_name"
+        display_name: "some display_name",
+        account_id: AccountsFixtures.account_fixture().id
       })
       |> Philopets.Accounts.Profiles.create_profile()
 

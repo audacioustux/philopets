@@ -3,6 +3,7 @@ defmodule Philopets.Files.ImagesFixtures do
   This module defines test helpers for creating
   entities via the `Philopets.Files.Images` context.
   """
+  alias Philopets.Accounts.ProfilesFixtures
 
   @doc """
   Generate a image.
@@ -12,7 +13,8 @@ defmodule Philopets.Files.ImagesFixtures do
       attrs
       |> Enum.into(%{
         name: "some name",
-        size: 42
+        size: 42,
+        profile_id: ProfilesFixtures.profile_fixture().id
       })
       |> Philopets.Files.Images.create_image()
 

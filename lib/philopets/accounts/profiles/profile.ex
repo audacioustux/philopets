@@ -5,19 +5,18 @@ defmodule Philopets.Accounts.Profiles.Profile do
 
   schema "profiles" do
     field(:display_name, :string)
-    belongs_to(:account, Account, type: :binary_id)
+    belongs_to(:account, Account)
 
     timestamps()
   end
 
-  @required_fields ~w[display_name]a
+  @required_fields ~w[display_name account_id]a
   @optional_fields ~w[]a
 
   @doc false
   def changeset(profile, attrs) do
     profile
     |> cast(attrs, @required_fields ++ @optional_fields)
-    |> put_assoc(:account, required: true)
     |> validate_required(@required_fields)
   end
 end

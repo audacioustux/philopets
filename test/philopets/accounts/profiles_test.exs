@@ -5,14 +5,14 @@ defmodule Philopets.Accounts.ProfilesTest do
 
   describe "profiles" do
     alias Philopets.Accounts.Profiles.Profile
+    alias Philopets.AccountsFixtures
 
     import Philopets.Accounts.ProfilesFixtures
-    import Philopets.Accounts.AccountsFixtures
 
-    @invalid_attrs %{display_name: nil}
+    @invalid_attrs %{display_name: nil, account_id: nil}
 
     test "list_profiles/0 returns all profiles" do
-      profile = profile_fixture(%{account: AccountsFixtures.account_fixture()})
+      profile = profile_fixture()
       assert Profiles.list_profiles() == [profile]
     end
 
@@ -22,7 +22,8 @@ defmodule Philopets.Accounts.ProfilesTest do
     end
 
     test "create_profile/1 with valid data creates a profile" do
-      valid_attrs = %{display_name: "some display_name"}
+      account = AccountsFixtures.account_fixture()
+      valid_attrs = %{display_name: "some display_name", account_id: account.id}
 
       assert {:ok, %Profile{} = profile} = Profiles.create_profile(valid_attrs)
       assert profile.display_name == "some display_name"
