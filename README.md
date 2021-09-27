@@ -1,3 +1,5 @@
+![Test Status](https://github.com/audacioustux/philopets/actions/workflows/ci.yml/badge.svg)
+
 # Philopets
 
 To start your Phoenix server:
