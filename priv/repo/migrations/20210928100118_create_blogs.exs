@@ -3,9 +3,9 @@ defmodule Philopets.Repo.Migrations.CreateBlogs do
 
   def change do
     create table(:blogs) do
-      add :title, :string
-      add :body, :string
-      add :profile_id, references(:profiles, on_delete: :nothing)
+      add :title, :string, null: false
+      add :body, :string, null: false
+      add :profile_id, references(:profiles, on_delete: :delete_all), null: false
 
       timestamps()
     end

@@ -1,19 +1,24 @@
 defmodule Philopets.Blogs.Blog do
-  use Ecto.Schema
+  use Philopets.Schema
   import Ecto.Changeset
+
+  alias Philopets.Accounts.Profiles.Profile
 
   schema "blogs" do
     field :body, :string
     field :title, :string
-    field :profile_id, :id
+    belongs_to(:profile, Profile)
 
     timestamps()
   end
 
+  @required_fields ~w[title body profile_id]a
+  @optional_fields ~w[]a
+
   @doc false
-  def changeset(blog, attrs) do
-    blog
-    |> cast(attrs, [:title, :body])
-    |> validate_required([:title, :body])
+  def changeset(profile, attrs) do
+    profile
+    |> cast(attrs, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
   end
 end

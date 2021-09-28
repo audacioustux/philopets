@@ -8,7 +8,7 @@ defmodule Philopets.AccountsTest do
 
     import Philopets.AccountsFixtures
 
-    @invalid_attrs %{hashed_password: nil, ntag: nil, state: nil, username: nil}
+    @invalid_attrs %{ntag: nil, state: nil, username: nil}
 
     test "list_accounts/0 returns all accounts" do
       account = account_fixture()
@@ -22,14 +22,12 @@ defmodule Philopets.AccountsTest do
 
     test "create_account/1 with valid data creates a account" do
       valid_attrs = %{
-        hashed_password: "some hashed_password",
         ntag: "0000",
         state: :active,
         username: "some username"
       }
 
       assert {:ok, %Account{} = account} = Accounts.create_account(valid_attrs)
-      assert account.hashed_password == "some hashed_password"
       assert account.ntag == "0000"
       assert account.state == :active
       assert account.username == "some username"
@@ -43,14 +41,12 @@ defmodule Philopets.AccountsTest do
       account = account_fixture()
 
       update_attrs = %{
-        hashed_password: "some updated hashed_password",
         ntag: "1111",
         state: :deactive,
         username: "some updated username"
       }
 
       assert {:ok, %Account{} = account} = Accounts.update_account(account, update_attrs)
-      assert account.hashed_password == "some updated hashed_password"
       assert account.ntag == "1111"
       assert account.state == :deactive
       assert account.username == "some updated username"

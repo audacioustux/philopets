@@ -5,10 +5,12 @@ defmodule Philopets.Blogs.CommentsTest do
 
   describe "blog_comments" do
     alias Philopets.Blogs.Comments.Comment
+    alias Philopets.BlogsFixtures
+    alias Philopets.Accounts.ProfilesFixtures
 
     import Philopets.Blogs.CommentsFixtures
 
-    @invalid_attrs %{body: nil}
+    @invalid_attrs %{body: nil, blog_id: nil}
 
     test "list_blog_comments/0 returns all blog_comments" do
       comment = comment_fixture()
@@ -21,7 +23,9 @@ defmodule Philopets.Blogs.CommentsTest do
     end
 
     test "create_comment/1 with valid data creates a comment" do
-      valid_attrs = %{body: "some body"}
+      profile = ProfilesFixtures.profile_fixture()
+      blog = BlogsFixtures.blog_fixture(%{profile_id: profile.id})
+      valid_attrs = %{body: "some body", blog_id: blog.id, profile_id: profile.id}
 
       assert {:ok, %Comment{} = comment} = Comments.create_comment(valid_attrs)
       assert comment.body == "some body"

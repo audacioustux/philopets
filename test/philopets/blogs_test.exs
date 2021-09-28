@@ -5,10 +5,11 @@ defmodule Philopets.BlogsTest do
 
   describe "blogs" do
     alias Philopets.Blogs.Blog
+    alias Philopets.Accounts.ProfilesFixtures
 
     import Philopets.BlogsFixtures
 
-    @invalid_attrs %{body: nil, title: nil}
+    @invalid_attrs %{body: nil, title: nil, profile_id: nil}
 
     test "list_blogs/0 returns all blogs" do
       blog = blog_fixture()
@@ -21,7 +22,8 @@ defmodule Philopets.BlogsTest do
     end
 
     test "create_blog/1 with valid data creates a blog" do
-      valid_attrs = %{body: "some body", title: "some title"}
+      profile = ProfilesFixtures.profile_fixture()
+      valid_attrs = %{body: "some body", title: "some title", profile_id: profile.id}
 
       assert {:ok, %Blog{} = blog} = Blogs.create_blog(valid_attrs)
       assert blog.body == "some body"
