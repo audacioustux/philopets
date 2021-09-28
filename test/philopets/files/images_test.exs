@@ -9,7 +9,7 @@ defmodule Philopets.Files.ImagesTest do
 
     import Philopets.Files.ImagesFixtures
 
-    @invalid_attrs %{name: nil, size: nil}
+    @invalid_attrs %{name: nil, size: nil, profile_id: nil}
 
     test "list_images/0 returns all images" do
       image = image_fixture()

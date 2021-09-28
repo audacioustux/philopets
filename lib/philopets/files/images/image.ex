@@ -7,6 +7,7 @@ defmodule Philopets.Files.Images.Image do
   schema "images" do
     field(:name, :string)
     field(:size, :integer)
+
     belongs_to(:profile, Profile)
 
     timestamps()

@@ -2,7 +2,8 @@ defmodule Philopets.Accounts.Account do
   use Philopets.Schema
   import Ecto.Changeset
 
-  alias Philopets.Accounts.Profile
+  alias Philopets.Accounts
+  alias Accounts.{Profiles.Profile, Emails.Email, Sessions.Session}
 
   schema "accounts" do
     field(:hashed_password, :string, redact: true)
@@ -10,7 +11,9 @@ defmodule Philopets.Accounts.Account do
     field(:state, Ecto.Enum, values: [:active, :deactive, :deleted, :banned])
     field(:username, :string)
 
-    has_one(:profile, Profile)
+    has_many(:profiles, Profile)
+    has_many(:emails, Email)
+    has_many(:sessions, Session)
 
     timestamps()
   end

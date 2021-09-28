@@ -1,20 +1,19 @@
-defmodule Philopets.Accounts.Profiles.Profile do
+defmodule Philopets.Accounts.Sessions.Session do
   use Philopets.Schema
   import Ecto.Changeset
-  alias Philopets.Accounts.Account
-  alias Philopets.Files.Images.Image
 
-  schema "profiles" do
-    field(:display_name, :string)
+  alias Philopets.Accounts.Account
+
+  schema "sessions" do
+    field :is_deleted, :boolean
 
     belongs_to(:account, Account)
-    has_many(:images, Image)
 
     timestamps()
   end
 
-  @required_fields ~w[display_name account_id]a
-  @optional_fields ~w[]a
+  @required_fields ~w[account_id]a
+  @optional_fields ~w[is_deleted]a
 
   @doc false
   def changeset(profile, attrs) do
