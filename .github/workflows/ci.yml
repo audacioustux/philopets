@@ -10,7 +10,7 @@ jobs:
         elixir: ['1.12']
     services:
       db:
-        image: postgres:13
+        image: postgres:14
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
